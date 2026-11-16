@@ -1,0 +1,31 @@
+insert into clientes (nome, cidade, estado, plano, status, valor_mensal) values
+  ('Mercado Bom Preço', 'Porto Alegre', 'RS', 'pro', 'ativo', 249.90),
+  ('Padaria Sabor do Sul', 'Canoas', 'RS', 'basico', 'ativo', 89.90),
+  ('Oficina Dois Irmãos', 'Novo Hamburgo', 'RS', 'basico', 'inativo', 89.90),
+  ('Clínica Vida Plena', 'Porto Alegre', 'RS', 'empresa', 'ativo', 590.00),
+  ('Livraria Página Nova', 'Caxias do Sul', 'RS', 'pro', 'pendente', 249.90),
+  ('Pet Shop Amigo Fiel', 'São Leopoldo', 'RS', 'basico', 'ativo', 89.90),
+  ('Academia Movimento', 'Pelotas', 'RS', 'pro', 'ativo', 249.90),
+  ('Estúdio Foco Design', 'Florianópolis', 'SC', 'basico', 'inativo', 89.90),
+  ('Construtora Alicerce', 'Curitiba', 'PR', 'empresa', 'ativo', 590.00),
+  ('Farmácia São João', 'Gravataí', 'RS', 'pro', 'ativo', 249.90),
+  ('Restaurante Fogo de Chão', 'Porto Alegre', 'RS', 'pro', 'pendente', 249.90),
+  ('Escola Aprender Mais', 'Santa Maria', 'RS', 'empresa', 'ativo', 590.00),
+  ('Floricultura Primavera', 'Joinville', 'SC', 'basico', 'ativo', 89.90),
+  ('Contabilidade Exata', 'São Paulo', 'SP', 'empresa', 'ativo', 590.00),
+  ('Ótica Visão Clara', 'Passo Fundo', 'RS', 'basico', 'pendente', 89.90),
+  ('Barbearia Navalha', 'Porto Alegre', 'RS', 'basico', 'inativo', 89.90),
+  ('Auto Peças Rodovia', 'Esteio', 'RS', 'pro', 'ativo', 249.90),
+  ('Hotel Serra Gaúcha', 'Gramado', 'RS', 'empresa', 'ativo', 590.00),
+  ('Sorveteria Gelato', 'Rio de Janeiro', 'RJ', 'basico', 'ativo', 89.90),
+  ('Advocacia Martins', 'Belo Horizonte', 'MG', 'pro', 'inativo', 249.90),
+  ('Mecânica Torque', 'Cachoeirinha', 'RS', 'basico', 'ativo', 89.90),
+  ('Doceria Açúcar Mascavo', 'Porto Alegre', 'RS', 'basico', 'ativo', 89.90),
+  ('Transportes Pampa', 'Uruguaiana', 'RS', 'empresa', 'pendente', 590.00),
+  ('Loja Moda Viva', 'Blumenau', 'SC', 'pro', 'ativo', 249.90),
+  ('Informática Byte', 'Viamão', 'RS', 'basico', 'ativo', 89.90);
+
+insert into config_filtro (nome, campo, operador, valor, ativo) values
+  ('padrao', 'status', 'igual', 'ativo', true),
+  ('clientes-poa', 'cidade', 'igual', 'Porto Alegre', false),
+  ('ticket-alto', 'valor_mensal', 'maior', '200', false);
