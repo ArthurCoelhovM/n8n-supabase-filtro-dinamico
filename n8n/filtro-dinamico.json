@@ -1,0 +1,303 @@
+{
+  "id": "FiltroDinamico01",
+  "name": "Filtro dinâmico Supabase",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "filtrar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "845a37b1-fcdd-47e2-8d9f-8a4842516ab9",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "27c796c6-6964-444f-b4e2-2a8aa1dda731"
+    },
+    {
+      "parameters": {},
+      "id": "c8105f8d-a436-41bd-9c50-519f7dd55cb8",
+      "name": "Teste manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "config_filtro",
+        "returnAll": true
+      },
+      "id": "16c827e4-38c6-43ac-a907-44d1caa61583",
+      "name": "Buscar configs",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        240,
+        100
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const consulta = $('Webhook').isExecuted ? ($('Webhook').first().json.query || {}) : {};\nconst configs = $input.all().map(item => item.json).filter(c => c.id);\n\nif (consulta.campo) {\n  return [{\n    json: {\n      campo: consulta.campo,\n      operador: consulta.operador || 'igual',\n      valor: consulta.valor ?? '',\n      origem: 'url'\n    }\n  }];\n}\n\nlet config;\nif (consulta.config) {\n  config = configs.find(c => c.nome === consulta.config);\n  if (!config) {\n    return [{ json: { erro: `Config \"${consulta.config}\" não encontrada`, configsDisponiveis: configs.map(c => c.nome) } }];\n  }\n} else {\n  config = configs.find(c => c.ativo);\n  if (!config) {\n    return [{ json: { erro: 'Nenhuma config ativa em config_filtro' } }];\n  }\n}\n\nreturn [{\n  json: {\n    campo: config.campo,\n    operador: config.operador,\n    valor: config.valor,\n    origem: 'config',\n    config: config.nome\n  }\n}];\n"
+      },
+      "id": "9968d8a0-44c8-401c-adc2-05a0cb3bda4f",
+      "name": "Montar filtro",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "clientes",
+        "returnAll": true
+      },
+      "id": "3eaa6a96-e96b-4ddf-9560-1321d08ee204",
+      "name": "Buscar clientes",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        720,
+        100
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const filtro = $('Montar filtro').first().json;\nif (filtro.erro) {\n  return [{ json: filtro }];\n}\n\nconst registros = $input.all().map(item => item.json).filter(r => r.id !== undefined);\nconst operadores = ['igual', 'diferente', 'contem', 'maior', 'menor'];\nconst campos = registros.length ? Object.keys(registros[0]) : [];\n\nif (!operadores.includes(filtro.operador)) {\n  return [{ json: { erro: `Operador inválido: ${filtro.operador}`, operadoresAceitos: operadores } }];\n}\nif (!campos.includes(filtro.campo)) {\n  return [{ json: { erro: `Campo inexistente: ${filtro.campo}`, camposDisponiveis: campos } }];\n}\n\nfunction normalizar(texto) {\n  return String(texto ?? '')\n    .normalize('NFD')\n    .replace(/[̀-ͯ]/g, '')\n    .toLowerCase()\n    .trim();\n}\n\nfunction comparar(valorRegistro, operador, valor) {\n  if (operador === 'maior' || operador === 'menor') {\n    const a = Number(valorRegistro);\n    const b = Number(valor);\n    if (Number.isNaN(a) || Number.isNaN(b)) return false;\n    return operador === 'maior' ? a > b : a < b;\n  }\n  const a = normalizar(valorRegistro);\n  const b = normalizar(valor);\n  if (operador === 'igual') return a === b;\n  if (operador === 'diferente') return a !== b;\n  return a.includes(b);\n}\n\nconst resultado = registros.filter(r => comparar(r[filtro.campo], filtro.operador, filtro.valor));\n\nreturn [{\n  json: {\n    filtro,\n    total: resultado.length,\n    registros: resultado,\n    geradoEm: new Date().toISOString()\n  }\n}];\n"
+      },
+      "id": "aeeb0ad5-0e81-4a4c-87a9-92ace5d452ca",
+      "name": "Aplicar filtro",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "06b610a0-eca8-4932-b2ed-231d68b269bf",
+              "leftValue": "={{ $json.erro }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "abeea1dc-31ad-4130-ba79-c5141ada022b",
+      "name": "Tem erro?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "4143cdfd-3b85-4be8-bd0c-4c5c87d588ba",
+      "name": "Responder 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { filtro: $json.filtro, total: $json.total } }];\n"
+      },
+      "id": "7f70162a-790e-4663-9b97-49c76e9bada1",
+      "name": "Preparar histórico",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "tableId": "historico_filtros",
+        "dataToSend": "autoMapInputData"
+      },
+      "id": "64bec699-74a0-4e7d-9f7b-213a8df8a203",
+      "name": "Salvar histórico",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($('Aplicar filtro').first().json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "df6d7200-d9d6-438c-8edc-98d813ca68ca",
+      "name": "Responder 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Buscar configs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Teste manual": {
+      "main": [
+        [
+          {
+            "node": "Buscar configs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar configs": {
+      "main": [
+        [
+          {
+            "node": "Montar filtro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar filtro": {
+      "main": [
+        [
+          {
+            "node": "Buscar clientes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar clientes": {
+      "main": [
+        [
+          {
+            "node": "Aplicar filtro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aplicar filtro": {
+      "main": [
+        [
+          {
+            "node": "Tem erro?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem erro?": {
+      "main": [
+        [
+          {
+            "node": "Responder 400",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar histórico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar histórico": {
+      "main": [
+        [
+          {
+            "node": "Salvar histórico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar histórico": {
+      "main": [
+        [
+          {
+            "node": "Responder 200",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo"
+  },
+  "pinData": {},
+  "active": false
+}
