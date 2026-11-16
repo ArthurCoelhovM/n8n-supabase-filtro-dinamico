@@ -1,0 +1,183 @@
+{
+  "filtro": {
+    "campo": "status",
+    "operador": "igual",
+    "valor": "ativo",
+    "origem": "config",
+    "config": "padrao"
+  },
+  "total": 17,
+  "registros": [
+    {
+      "id": 1,
+      "nome": "Mercado Bom Preço",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 2,
+      "nome": "Padaria Sabor do Sul",
+      "cidade": "Canoas",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 4,
+      "nome": "Clínica Vida Plena",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 6,
+      "nome": "Pet Shop Amigo Fiel",
+      "cidade": "São Leopoldo",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 7,
+      "nome": "Academia Movimento",
+      "cidade": "Pelotas",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 9,
+      "nome": "Construtora Alicerce",
+      "cidade": "Curitiba",
+      "estado": "PR",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 10,
+      "nome": "Farmácia São João",
+      "cidade": "Gravataí",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 12,
+      "nome": "Escola Aprender Mais",
+      "cidade": "Santa Maria",
+      "estado": "RS",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 13,
+      "nome": "Floricultura Primavera",
+      "cidade": "Joinville",
+      "estado": "SC",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 14,
+      "nome": "Contabilidade Exata",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 17,
+      "nome": "Auto Peças Rodovia",
+      "cidade": "Esteio",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 18,
+      "nome": "Hotel Serra Gaúcha",
+      "cidade": "Gramado",
+      "estado": "RS",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 19,
+      "nome": "Sorveteria Gelato",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 21,
+      "nome": "Mecânica Torque",
+      "cidade": "Cachoeirinha",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 22,
+      "nome": "Doceria Açúcar Mascavo",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 24,
+      "nome": "Loja Moda Viva",
+      "cidade": "Blumenau",
+      "estado": "SC",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 25,
+      "nome": "Informática Byte",
+      "cidade": "Viamão",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    }
+  ],
+  "geradoEm": "2026-11-16T18:30:00.000Z"
+}

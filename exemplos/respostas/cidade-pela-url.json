@@ -1,0 +1,62 @@
+{
+  "filtro": {
+    "campo": "cidade",
+    "operador": "igual",
+    "valor": "porto alegre",
+    "origem": "url"
+  },
+  "total": 5,
+  "registros": [
+    {
+      "id": 1,
+      "nome": "Mercado Bom Preço",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "ativo",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 4,
+      "nome": "Clínica Vida Plena",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "empresa",
+      "status": "ativo",
+      "valor_mensal": 590,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 11,
+      "nome": "Restaurante Fogo de Chão",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "pro",
+      "status": "pendente",
+      "valor_mensal": 249.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 16,
+      "nome": "Barbearia Navalha",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "inativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    },
+    {
+      "id": 22,
+      "nome": "Doceria Açúcar Mascavo",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "plano": "basico",
+      "status": "ativo",
+      "valor_mensal": 89.9,
+      "criado_em": "2026-11-16T18:23:45.879097+00:00"
+    }
+  ],
+  "geradoEm": "2026-11-16T18:30:00.000Z"
+}

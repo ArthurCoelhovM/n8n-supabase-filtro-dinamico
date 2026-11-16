@@ -1,0 +1,13 @@
+{
+  "erro": "Campo inexistente: telefone",
+  "camposDisponiveis": [
+    "id",
+    "nome",
+    "cidade",
+    "estado",
+    "plano",
+    "status",
+    "valor_mensal",
+    "criado_em"
+  ]
+}
