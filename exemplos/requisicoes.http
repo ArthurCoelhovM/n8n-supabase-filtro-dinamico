@@ -1,0 +1,14 @@
+### Sem parâmetros: usa a config ativa em config_filtro
+GET http://localhost:5678/webhook/filtrar
+
+### Usa uma config salva pelo nome
+GET http://localhost:5678/webhook/filtrar?config=ticket-alto
+
+### Filtro direto pela URL (sobrescreve qualquer config)
+GET http://localhost:5678/webhook/filtrar?campo=cidade&valor=porto%20alegre
+
+### Operador contem
+GET http://localhost:5678/webhook/filtrar?campo=nome&operador=contem&valor=padaria
+
+### Campo inexistente: devolve 400
+GET http://localhost:5678/webhook/filtrar?campo=telefone&valor=51
